@@ -4,8 +4,8 @@ pipeline {
         stage('Checkout of SCM.') {
             steps {
                 sh 'git --version'
-                sh 'docker -v'
                 
+
                 sh '''
                     echo "Checking out of GitHub"
                 '''
@@ -20,6 +20,20 @@ pipeline {
                     echo "Linting"
                     tidy -q -e ./content/*.html
                 '''
+            }
+        }
+        
+        def registry = 'adopheide/nginx-capstone'
+        stage('Build Docker Container.') {
+            steps {
+                sh 'docker -v'
+
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                sh "docker build -t ${registry} ."
+                sh "docker tag ${registry} ${registry}"
+                sh "docker push ${registry}"
+      }
             }
         }
 
