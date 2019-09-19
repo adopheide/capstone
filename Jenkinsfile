@@ -3,13 +3,15 @@ pipeline {
     stages {
         stage('Checkout of SCM.') {
             steps {
+                sh 'git --version'
+                sh 'docker -v'
+                
                 sh '''
                     echo "Checking out of GitHub"
                 '''
                 checkout scm
 
-                sh 'git --version'
-                sh 'docker -v'
+
             }
         }
         stage('Lint HTML.') {
@@ -20,14 +22,7 @@ pipeline {
                 '''
             }
         }
-        stage('Build Docker Container.') {
-            steps {
-                sh '''
-                    echo "Building"
-                    tidy -q -e ./content/*.html
-                '''
-            }
-        }
+
 
     }
 }
