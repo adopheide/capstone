@@ -29,13 +29,15 @@ pipeline {
         stage('Build Docker Container.') {
             steps {
                 sh 'docker -v'
+                environment {
+                DOCKER_CREDS = credentials('docker')
+                }
 
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                sh "docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW"
                 sh "docker build -t ${registry} ."
                 sh "docker tag ${registry} ${registry}"
                 sh "docker push ${registry}"
-      }
+      
             }
         }
 
