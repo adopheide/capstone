@@ -13,7 +13,7 @@ pipeline {
             steps {
                 sh '''
                     echo "Linting"
-                    tidy -q -e *.html
+                    tidy -q -e ./content/*.html
                 '''
             }
         }
