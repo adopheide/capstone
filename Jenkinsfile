@@ -1,4 +1,5 @@
 pipeline {
+    def registry = 'adopheide/nginx-capstone'
     agent any
     stages {
         stage('Checkout of SCM.') {
@@ -23,7 +24,7 @@ pipeline {
             }
         }
         
-        def registry = 'adopheide/nginx-capstone'
+        
         stage('Build Docker Container.') {
             steps {
                 sh 'docker -v'
