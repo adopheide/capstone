@@ -1,5 +1,6 @@
+def registry = 'adopheide/nginx-capstone'
+
 pipeline {
-    def registry = 'adopheide/nginx-capstone'
     agent any
     stages {
         stage('Checkout of SCM.') {
