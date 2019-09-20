@@ -35,7 +35,7 @@ pipeline {
         stage('AWS Deployment.') {
             steps {
                 sh 'echo "Connecting to AWS"'
-                withAWS(region: 'us-east-2', credentials: 'udacity1') {
+                withAwsCli(defaultRegion: 'us-east-2', credentialsId: 'udacity1') {
                     sh "aws eks --region us-east-2 update-kubeconfig --name capstone"
                     sh "kubectl apply -f aws/aws-auth-cm.yaml"
                 }
