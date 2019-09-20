@@ -38,6 +38,9 @@ pipeline {
                 withAWS(region: 'us-east-2', credentials: 'udacity1') {
                     sh 'aws eks --region us-east-2 update-kubeconfig --name capstone'
                     sh 'kubectl apply -f aws/aws-auth-cm.yaml'
+                    sh "kubectl set image deployments/capstone capstone=${registry}:latest"
+                    sh "kubectl apply -f aws/deployment.yml"
+                    sh "kubectl get pods"
                 }
                 sh 'echo "Upload complete"'
             }
