@@ -1,0 +1,9 @@
+
+--Create Cluster
+aws eks --region us-east-2 create-cluster --name <clusterName> --role-arn <EKS-role-ARN> --resources-vpc-config subnetIds=<subnet-id-1>,<subnet-id-2>,<subnet-id-3>,securityGroupIds=<security-group-id>
+
+--Cluster Status
+aws eks --region us-east-2 describe-cluster --name <clusterName> --query cluster.status
+
+--Crate Config
+aws eks --region us-east-2 update-kubeconfig --name <clusterName>
