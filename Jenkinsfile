@@ -36,14 +36,11 @@ pipeline {
             steps {
                 
                 sh 'echo "Connecting to AWS"'''
-
-                withAwsCli( (1)
-                        credentialsId: 'myaccess', (2)
-                        defaultRegion: 'us-east-2']) { (3)
-
-                        sh 'aws --version'
+                
+                withAWS(region: 'us-east-2', credentials: 'udacity1') {
+                    sh 'aws --version'
+                    sh "aws eks --region us-east-2 update-kubeconfig --name capstone"
                 }
-
                 sh 'echo "Upload complete"'
             }
         }
