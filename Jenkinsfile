@@ -34,9 +34,10 @@ pipeline {
         }
         stage('AWS Deployment.') {
             steps {
+                sh 'which aws'
                 sh 'echo "Connecting to AWS"'
                 withAWS(region: 'us-east-2', credentials: 'udacity1') {
-                    sh 'kubectl get svc'
+                    
                 }
                 sh 'echo "Upload complete"'
             }
