@@ -1,20 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: capstone
+  name: capstone-deployment
   labels:
     app: capstone
-  namespace: default
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: capstone
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -23,7 +17,5 @@ spec:
       containers:
       - name: capstone
         image: adopheide/nginx-capstone:latest
-        imagePullPolicy: Always
         ports:
-        - containerPort: 3000
-          protocol: TCP
+        - containerPort: 80
