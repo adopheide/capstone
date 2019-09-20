@@ -36,8 +36,8 @@ pipeline {
             steps {
                 sh 'echo "Connecting to AWS"'
                 withAWS(region: 'us-east-2', credentials: 'udacity1') {
-                    sh 'export KUBECONFIG=$(pwd)/kubeconfig'
-                    sh 'kubectl apply -f $(pwd)/aws/aws-auth-cm.yaml'
+                    sh 'aws eks --region us-east-2 update-kubeconfig --name contract'
+                    sh 'kubectl apply -f aws/aws-auth-cm.yaml'
                 }
                 sh 'echo "Upload complete"'
             }
