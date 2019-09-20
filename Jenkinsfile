@@ -35,7 +35,7 @@ pipeline {
         stage('AWS Deployment.') {
             steps {
                 sh 'echo "Connecting to AWS"'
-                withAWS(region: 'us-east-2', credentials: 'udacity1') {
+                withAWS(region: 'us-east-2', credentials: 'myaccess') {
                     sh "aws ec2 describe-security-groups"
                 }
                 sh 'echo "Upload complete"'
