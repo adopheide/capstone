@@ -38,7 +38,7 @@ pipeline {
                 sh 'echo "Connecting to AWS"'''
 
                 withAwsCli( (1)
-                        credentialsId: 'udacity1', (2)
+                        credentialsId: 'myaccess', (2)
                         defaultRegion: 'us-east-2']) { (3)
 
                         sh 'aws --version'
