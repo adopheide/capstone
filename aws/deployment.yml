@@ -21,9 +21,9 @@ spec:
         app: capstone
     spec:
       containers:
-      - image: adopheide/nginx-capstone:latest
+      - name: capstone
+        image: adopheide/nginx-capstone:latest
         imagePullPolicy: Always
-        name: capstone
         ports:
         - containerPort: 3000
           protocol: TCP
