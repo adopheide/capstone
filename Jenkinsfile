@@ -32,16 +32,6 @@ pipeline {
                 sh "docker push ${registry}"
             }
         }
-        stage('Upload to AWS.') {
-            steps {
-                sh 'echo "Connecting to AWS"'
-                withAWS(region: 'us-east-2', credentials: 'udacity1') {
-                    sh 'echo "index.html">index.html'
-                    s3Upload(file:'/var/lib/jenkins/workspace/static_master/index.html', bucket:'dopheide-jenkins-s3', path:'', acl:'PublicRead')
-                }
-                sh 'echo "Upload complete"'
-            }
-        }
         stage('AWS Deployment.') {
             steps {
                 sh 'echo "Connecting to AWS"'
