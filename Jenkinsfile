@@ -36,7 +36,6 @@ pipeline {
             steps {
                 sh 'aws --version'
                 sh 'echo "Connecting to AWS"'
-                dir (./)
                 withAWS(region: 'us-east-2', credentials: 'udacity1') {
                     sh "aws eks --region us-east-2 update-kubeconfig --name capstone"
                 }
