@@ -34,12 +34,9 @@ pipeline {
         }
         stage('AWS Deployment.') {
             steps {
-                
-                sh 'echo "Connecting to AWS"'''
-                
+                sh 'echo "Connecting to AWS"'
                 withAWS(region: 'us-east-2', credentials: 'udacity1') {
-                    sh 'aws --version'
-                    sh "aws eks --region us-east-2 update-kubeconfig --name capstone"
+                    sh "aws --version"
                 }
                 sh 'echo "Upload complete"'
             }
